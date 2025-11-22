@@ -43,12 +43,12 @@ Execute specific commands in the container:
 
 ```bash
 # Check installed tools
-docker run -it opendesk-bootstrap kubectl version --client
-docker run -it opendesk-bootstrap helm version
-docker run -it opendesk-bootstrap helmfile version
+docker run --rm -it opendesk-bootstrap kubectl version --client
+docker run --rm -it opendesk-bootstrap helm version
+docker run --rm -it opendesk-bootstrap helmfile version
 
 # Access the extracted opendesk files
-docker run -it opendesk-bootstrap ls -la /workspace/opendesk
+docker run --rm -it opendesk-bootstrap ls -la /workspace/opendesk
 ```
 
 ### Interactive Shell
