@@ -4,6 +4,7 @@ FROM alpine:3.19
 RUN apk add --no-cache \
     bash \
     curl \
+    git \
     ca-certificates \
     tar \
     bzip2
