@@ -10,13 +10,13 @@ RUN apk add --no-cache \
     bzip2
 
 # Install kubectl
-ARG KUBECTL_VERSION=1.28.4
+ARG KUBECTL_VERSION=1.34.2
 RUN curl -LO "https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl" && \
     chmod +x kubectl && \
     mv kubectl /usr/local/bin/
 
-# Install helm (version < 4.0, using 3.13.3)
-ARG HELM_VERSION=3.13.3
+# Install helm (version < 4.0, using 3.19.2)
+ARG HELM_VERSION=3.19.2
 RUN curl -LO "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" && \
     tar -zxvf helm-v${HELM_VERSION}-linux-amd64.tar.gz && \
     mv linux-amd64/helm /usr/local/bin/helm && \
@@ -26,7 +26,7 @@ RUN curl -LO "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" && \
 RUN helm plugin install https://github.com/databus23/helm-diff
 
 # Install helmfile
-ARG HELMFILE_VERSION=0.159.0
+ARG HELMFILE_VERSION=1.2.0
 RUN curl -LO "https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz" && \
     tar -zxvf helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz && \
     mv helmfile /usr/local/bin/helmfile && \

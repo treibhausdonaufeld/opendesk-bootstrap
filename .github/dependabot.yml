@@ -1,0 +1,27 @@
+version: 2
+updates:
+  # Monitor Dockerfile for base image updates
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+
+  # Monitor GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+
+# Note: Dependabot cannot automatically update ARG values in Dockerfiles.
+# To update kubectl, helm, and helmfile versions:
+# 1. Check for new releases:
+#    - kubectl: https://github.com/kubernetes/kubernetes/releases
+#    - helm: https://github.com/helm/helm/releases
+#    - helmfile: https://github.com/helmfile/helmfile/releases
+# 2. Update the ARG values in the Dockerfile:
+#    - KUBECTL_VERSION
+#    - HELM_VERSION
+#    - HELMFILE_VERSION
+# 3. Test the build and push the changes
