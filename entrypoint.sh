@@ -32,5 +32,7 @@ rm /tmp/opendesk.tar.bz2
 
 echo "Opendesk ${OPENDESK_VERSION} successfully extracted to ${OPENDESK_DIR}"
 
+cd "${OPENDESK_DIR}"
+
 # Execute the provided command or default CMD
 exec "$@"
