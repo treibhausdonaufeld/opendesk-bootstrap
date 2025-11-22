@@ -1,6 +1,14 @@
 #!/bin/bash
 set -e
 
+# Generate MASTER_PASSWORD if not already set
+if [ -z "$MASTER_PASSWORD" ]; then
+    export MASTER_PASSWORD=$(pwgen -y -s 32 1)
+    echo "Generated MASTER_PASSWORD: $MASTER_PASSWORD"
+else
+    echo "Using existing MASTER_PASSWORD"
+fi
+
 # Validate OPENDESK_VERSION format
 if ! [[ "$OPENDESK_VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
     echo "Error: OPENDESK_VERSION must match format vX.Y.Z (e.g., v1.9.0)"

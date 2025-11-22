@@ -7,7 +7,8 @@ RUN apk add --no-cache \
     git \
     ca-certificates \
     tar \
-    bzip2
+    bzip2 \
+    pwgen
 
 # Install kubectl
 ARG KUBECTL_VERSION=1.34.2
