@@ -22,7 +22,7 @@ cd "${OPENDESK_DIR}"
 
 # Git clone opendesk repository from https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/ and checkout version ${OPENDESK_VERSION}
 echo "Cloning opendesk repository..."
-if ! git clone --depth 1 https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk.git .; then
+if ! git clone https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk.git .; then
     echo "Error: Failed to clone opendesk repository"
     exit 1
 fi
