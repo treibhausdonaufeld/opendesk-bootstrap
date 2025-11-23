@@ -6,6 +6,8 @@ if [ -z "$ENVIRONMENT" ]; then
     export ENVIRONMENT="prod"
     echo "ENVIRONMENT not set. Defaulting to 'prod'"
 else
+    echo "Using existing ENVIRONMENT: $ENVIRONMENT"
+fi
 
 # set NAMESPACE variable to "opendesk" if not already set
 if [ -z "$NAMESPACE" ]; then
