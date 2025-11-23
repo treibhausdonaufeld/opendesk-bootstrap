@@ -43,5 +43,9 @@ RUN chmod +x /entrypoint.sh
 # Set working directory
 WORKDIR /workspace
 
+# set default value for variable NAMESPACE to opendesk
+ENV NAMESPACE=opendesk
+ENV ENVIRONMENT=prod
+
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["/bin/bash"]
+CMD ["helmfile", "apply", "-e", "$ENVIRONMENT", "-n", "$NAMESPACE"]

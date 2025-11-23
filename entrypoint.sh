@@ -34,5 +34,13 @@ echo "Opendesk ${OPENDESK_VERSION} successfully extracted to ${OPENDESK_DIR}"
 
 cd "${OPENDESK_DIR}"
 
+# loop over all files in /helmfile directory and copy them to helmfile/environments/prod/ directory
+for file in /helmfile/*; do
+    if [ -f "$file" ]; then
+        cp "$file" "${OPENDESK_DIR}/helmfile/environments/prod/"
+        echo "Copied $(basename "$file") to helmfile/environments/prod/"
+    fi
+done
+
 # Execute the provided command or default CMD
 exec "$@"
