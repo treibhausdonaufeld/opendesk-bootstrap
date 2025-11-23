@@ -15,24 +15,36 @@ if ! [[ "$OPENDESK_VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
     exit 1
 fi
 
-# Download and extract opendesk archive
-OPENDESK_URL="https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/archive/${OPENDESK_VERSION}/opendesk-${OPENDESK_VERSION}.tar.bz2"
-OPENDESK_DIR="/workspace/opendesk"
+mkdir -p "${OPENDESK_DIR}"
+cd "${OPENDESK_DIR}"
 
-echo "Downloading opendesk ${OPENDESK_VERSION}..."
-if ! curl -L --fail --retry 3 --retry-delay 2 "${OPENDESK_URL}" -o /tmp/opendesk.tar.bz2; then
-    echo "Error: Failed to download opendesk ${OPENDESK_VERSION}"
+# Git clone opendesk repository from https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/ and checkout version ${OPENDESK_VERSION}
+echo "Cloning opendesk repository..."
+if ! git clone --depth 1 https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk.git .; then
+    echo "Error: Failed to clone opendesk repository"
+    exit 1
+fi
+echo "Checking out version ${OPENDESK_VERSION}..."
+if ! git checkout "${OPENDESK_VERSION}"; then
+    echo "Error: Failed to checkout version ${OPENDESK_VERSION}"
     exit 1
 fi
 
-echo "Extracting opendesk archive..."
-mkdir -p "${OPENDESK_DIR}"
-tar -xjf /tmp/opendesk.tar.bz2 -C "${OPENDESK_DIR}" --strip-components=1
-rm /tmp/opendesk.tar.bz2
+# # Download and extract opendesk archive
+# OPENDESK_URL="https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/archive/${OPENDESK_VERSION}/opendesk-${OPENDESK_VERSION}.tar.bz2"
+# OPENDESK_DIR="/workspace/opendesk"
 
-echo "Opendesk ${OPENDESK_VERSION} successfully extracted to ${OPENDESK_DIR}"
+# echo "Downloading opendesk ${OPENDESK_VERSION}..."
+# if ! curl -L --fail --retry 3 --retry-delay 2 "${OPENDESK_URL}" -o /tmp/opendesk.tar.bz2; then
+#     echo "Error: Failed to download opendesk ${OPENDESK_VERSION}"
+#     exit 1
+# fi
 
-cd "${OPENDESK_DIR}"
+# echo "Extracting opendesk archive..."
+# tar -xjf /tmp/opendesk.tar.bz2 -C "${OPENDESK_DIR}" --strip-components=1
+# rm /tmp/opendesk.tar.bz2
+
+# echo "Opendesk ${OPENDESK_VERSION} successfully extracted to ${OPENDESK_DIR}"
 
 # loop over all files in /helmfile directory and copy them to helmfile/environments/prod/ directory
 for file in /helmfile/*; do
