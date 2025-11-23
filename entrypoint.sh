@@ -15,6 +15,8 @@ if ! [[ "$OPENDESK_VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
     exit 1
 fi
 
+OPENDESK_DIR="/workspace/opendesk"
+
 mkdir -p "${OPENDESK_DIR}"
 cd "${OPENDESK_DIR}"
 
@@ -32,7 +34,6 @@ fi
 
 # # Download and extract opendesk archive
 # OPENDESK_URL="https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/archive/${OPENDESK_VERSION}/opendesk-${OPENDESK_VERSION}.tar.bz2"
-# OPENDESK_DIR="/workspace/opendesk"
 
 # echo "Downloading opendesk ${OPENDESK_VERSION}..."
 # if ! curl -L --fail --retry 3 --retry-delay 2 "${OPENDESK_URL}" -o /tmp/opendesk.tar.bz2; then
