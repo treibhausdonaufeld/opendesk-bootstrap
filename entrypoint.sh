@@ -1,6 +1,21 @@
 #!/bin/bash
 set -e
 
+# set ENVIRONMENT variable to "prod" if not already set
+if [ -z "$ENVIRONMENT" ]; then
+    export ENVIRONMENT="prod"
+    echo "ENVIRONMENT not set. Defaulting to 'prod'"
+else
+
+# set NAMESPACE variable to "opendesk" if not already set
+if [ -z "$NAMESPACE" ]; then
+    export NAMESPACE="opendesk"
+    echo "NAMESPACE not set. Defaulting to 'opendesk'"
+else
+    echo "Using existing NAMESPACE: $NAMESPACE"
+fi
+
+
 # Generate MASTER_PASSWORD if not already set
 if [ -z "$MASTER_PASSWORD" ]; then
     export MASTER_PASSWORD=$(pwgen -y -s 32 1)
@@ -50,8 +65,8 @@ fi
 # loop over all files in /helmfile directory and copy them to helmfile/environments/prod/ directory
 for file in /helmfile/*; do
     if [ -f "$file" ]; then
-        cp "$file" "${OPENDESK_DIR}/helmfile/environments/prod/"
-        echo "Copied $(basename "$file") to helmfile/environments/prod/"
+        cp "$file" "${OPENDESK_DIR}/helmfile/environments/$ENVIRONMENT/"
+        echo "Copied $(basename "$file") to helmfile/environments/$ENVIRONMENT/"
     fi
 done
 
