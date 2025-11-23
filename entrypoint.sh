@@ -1,21 +1,19 @@
 #!/bin/bash
 set -e
 
-# set ENVIRONMENT variable to "prod" if not already set
+# Validate ENVIRONMENT is set
 if [ -z "$ENVIRONMENT" ]; then
-    export ENVIRONMENT="prod"
-    echo "ENVIRONMENT not set. Defaulting to 'prod'"
-else
-    echo "Using existing ENVIRONMENT: $ENVIRONMENT"
+    echo "Error: ENVIRONMENT variable is not set"
+    exit 1
 fi
+echo "Using ENVIRONMENT: $ENVIRONMENT"
 
-# set NAMESPACE variable to "opendesk" if not already set
+# Validate NAMESPACE is set
 if [ -z "$NAMESPACE" ]; then
-    export NAMESPACE="opendesk"
-    echo "NAMESPACE not set. Defaulting to 'opendesk'"
-else
-    echo "Using existing NAMESPACE: $NAMESPACE"
+    echo "Error: NAMESPACE variable is not set"
+    exit 1
 fi
+echo "Using NAMESPACE: $NAMESPACE"
 
 
 # Generate MASTER_PASSWORD if not already set

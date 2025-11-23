@@ -48,4 +48,4 @@ ENV NAMESPACE=opendesk
 ENV ENVIRONMENT=prod
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["helmfile", "apply", "-e", "$ENVIRONMENT", "-n", "$NAMESPACE"]
+CMD ["sh", "-c", "helmfile apply -e $ENVIRONMENT -n $NAMESPACE"]
