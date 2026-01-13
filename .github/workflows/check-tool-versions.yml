@@ -58,7 +58,7 @@ jobs:
 
       - name: Create issue for kubectl update
         if: steps.kubectl.outputs.needs_update == 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const title = `Update kubectl from ${context.payload.kubectl?.current || '${{ steps.kubectl.outputs.current }}'} to ${{ steps.kubectl.outputs.latest }}`;
@@ -87,7 +87,7 @@ jobs:
 
       - name: Create issue for helm update
         if: steps.helm.outputs.needs_update == 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const title = `Update helm from ${{ steps.helm.outputs.current }} to ${{ steps.helm.outputs.latest }}`;
@@ -116,7 +116,7 @@ jobs:
 
       - name: Create issue for helmfile update
         if: steps.helmfile.outputs.needs_update == 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const title = `Update helmfile from ${{ steps.helmfile.outputs.current }} to ${{ steps.helmfile.outputs.latest }}`;
